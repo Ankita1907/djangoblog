@@ -1,0 +1,57 @@
+
+{% extends 'blog/base.html' %}
+
+        {% block content %}
+
+
+
+
+
+        <a href="post/new" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-pencil"></span> New 
+        </a>
+        {% for post in posts %}
+
+
+
+            <div class="addcss">
+
+                <h2><a href="">{{ post.title }}</a></h2>
+                <p>{{ post.text|linebreaksbr }}</p>
+                <strong><p>published: {{ post.published_date }}</p></strong>
+                <strong><p>written by: {{ post.author }}</p></strong>
+
+
+
+
+
+
+
+
+
+
+            </div>
+
+<div class="thecmmnt">
+
+     <h4>Comments :</h4>
+
+            {% for comment in post.comment_set.all %}
+                <h4><a href="">{{ comment.name }}</a></h4>
+                <p>{{ comment.body|linebreaksbr }}</p>
+                <strong><p>published: {{ comment.created_on }}</p></strong>
+            {% endfor %}
+
+
+
+    <h4>New comment:</h4>
+    <form method="comment" >
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+
+        </div>
+
+        {% endfor %}
+    {% endblock %}
